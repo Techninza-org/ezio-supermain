@@ -14,6 +14,7 @@ const AddDestination = () => {
         features: [],
         numberOfCustomiseOptions: '',
         customise_options: [],
+        image: ''
     });
 
 
@@ -36,6 +37,29 @@ const AddDestination = () => {
                 ...prevData,
                 customise_options: updatedCustomiseOptions,
             }));
+        } else if (name === 'image') {
+            const file = e.target.files[0];
+            const imageFormData = new FormData();
+            imageFormData.append('file', file);
+            imageFormData.append('upload_preset', 'c3k94jx2');
+            imageFormData.append('folder', 'ezio_vendor');
+
+            axios.post('https://api.cloudinary.com/v1_1/dr4iluda9/image/upload', imageFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => {
+                    console.log('File uploaded successfully');
+                    console.log(response.data.secure_url);
+                    setFormData({
+                        ...formData,
+                        image: response.data.secure_url
+                    });
+                })
+                .catch(error => {
+                    console.error('Error uploading file: ', error);
+                });
         } else {
             setFormData({
                 ...formData,
@@ -47,7 +71,7 @@ const AddDestination = () => {
     async function handleSubmit(e) {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        console.log(formData);
+        console.log(formData, 'formdata');
         const formDataToSend = new FormData();
         formDataToSend.append("destination", formData.destination);
         formDataToSend.append("pincode", formData.pincode);
@@ -56,13 +80,17 @@ const AddDestination = () => {
         formDataToSend.append("description", formData.description);
         formDataToSend.append("features", formData.features);
         formDataToSend.append("customise_options", formData.customise_options);
+        formDataToSend.append("image", formData.image);
 
-        console.log(formDataToSend, 'to send');
+        console.log(formDataToSend, 'send');
+        for (var pair of formDataToSend.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
 
         const res = await axios.post("http://103.189.172.172:3000/destination", formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                // "Content-Type": "application/json",
+                // "Content-Type": "multipart/form-data",
             }
         })
         if (res.status === 200) {
@@ -87,7 +115,7 @@ const AddDestination = () => {
                         value={formData.features[i - 1] || ""}
                         onChange={handleChange}
                         className="form-control"
-                        // placeholder={`Feature ${i}`}
+                    // placeholder={`Feature ${i}`}
                     />
                 </div>
             );
@@ -109,14 +137,13 @@ const AddDestination = () => {
                         value={formData.customise_options[i - 1] || ""}
                         onChange={handleChange}
                         className="form-control"
-                        // placeholder={`Customise Option ${i}`}
+                    // placeholder={`Customise Option ${i}`}
                     />
                 </div>
             );
         }
         return inputs;
     }
-
 
     return (
         <>
@@ -187,6 +214,15 @@ const AddDestination = () => {
                             <label htmlFor="numberOfPickups" className="form-label">Number of Customise Options</label>
                             <input type="text" name="numberOfCustomiseOptions" value={formData.numberOfCustomiseOptions} onChange={handleChange} placeholder="Number of customise options" className="form-control mb-3" />
                             {renderCustomiseOptionsInputs()}
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Image</label>
+                            <input
+                                type="file"
+                                name="image"
+                                className="form-control"
+                                onChange={handleChange}
+                            />
                         </div>
 
 

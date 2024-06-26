@@ -9,6 +9,7 @@ import UserTrips from './views/pages/Trips/UserTrips'
 import AddDestination from './views/pages/destination/AddDestination'
 import AllDestinations from './views/pages/destination/AllDestinations'
 import KycDetails from './views/pages/kyc/kycDetails'
+import ServiceOption from './views/pages/destination/ServiceOption'
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
@@ -64,6 +65,7 @@ const App = () => {
           <Route exact path="/destination/add" name="destination" element={<AddDestination />} />
           <Route exact path="/destination/all" name="destination" element={<AllDestinations />} />
           <Route exact path="/kyc/:id" name="kyc" element={<KycDetails />} />
+          <Route exact path="/service-options" name="service-options" element={<ServiceOption />} />
 
           <Route path="*" name="Home" element={<DefaultLayout />} />
         </Routes>

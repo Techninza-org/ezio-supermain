@@ -44,11 +44,11 @@ const AllDestinations = () => {
             accessorKey: 'longitude',
             size: 50,
         },
-        {
-            header: 'Edit',
-            accessorFn: (dataRow) => <Link to={`/vendor/trips/${dataRow.id}`} className="btn btn-primary"><CIcon icon={cilPaperPlane} /></Link>,
-            size: 50
-        },
+        // {
+        //     header: 'Edit',
+        //     accessorFn: (dataRow) => <Link to={`/vendor/trips/${dataRow.id}`} className="btn btn-primary"><CIcon icon={cilPaperPlane} /></Link>,
+        //     size: 50
+        // },
 
     ]
 
