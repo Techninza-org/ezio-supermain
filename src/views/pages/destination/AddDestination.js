@@ -87,7 +87,7 @@ const AddDestination = () => {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
 
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/destination`, formData, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}destination`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 // "Content-Type": "multipart/form-data",
