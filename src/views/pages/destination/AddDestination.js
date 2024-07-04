@@ -41,10 +41,10 @@ const AddDestination = () => {
             const file = e.target.files[0];
             const imageFormData = new FormData();
             imageFormData.append('file', file);
-            imageFormData.append('upload_preset', 'c3k94jx2');
+            imageFormData.append('upload_preset', 'm3opjz73');
             imageFormData.append('folder', 'ezio_vendor');
 
-            axios.post('https://api.cloudinary.com/v1_1/dr4iluda9/image/upload', imageFormData, {
+            axios.post('https://api.cloudinary.com/v1_1/dleiya55u/image/upload', imageFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
