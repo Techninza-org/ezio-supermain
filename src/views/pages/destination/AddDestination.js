@@ -90,7 +90,7 @@ const AddDestination = () => {
         const res = await axios.post(`${import.meta.env.VITE_BASE_URL}destination`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                // "Content-Type": "multipart/form-data",
+                "Content-Type": "multipart/form-data",
             }
         })
         if (res.status === 200) {
