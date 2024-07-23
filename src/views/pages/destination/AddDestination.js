@@ -4,6 +4,10 @@ import { CForm } from '@coreui/react';
 import axios from 'axios';
 
 const AddDestination = () => {
+    const [predictions, setPredictions] = useState([]);
+    const [fetchPredictions, setFetchPredictions] = useState(false);
+
+
     const [formData, setFormData] = useState({
         destination: '',
         pincode: '',
@@ -16,6 +20,40 @@ const AddDestination = () => {
         customise_options: [],
         image: ''
     });
+
+    const handleAddressChange = async (e) => {
+        const address = e.target.value;
+        setFormData({ ...formData, destination: address });
+        if (address !== '') {
+            setFetchPredictions(true);
+            const predictions = await axios.get(`${import.meta.env.VITE_BASE_URL}destination/search/destination?address=${address}`);
+            setPredictions(predictions.data.predictions);
+            console.log(predictions.data.predictions);
+        } else {
+            setFetchPredictions(false);
+            setPredictions([]);
+        }
+    };
+
+    const handlePredictionSelect = async (description) => {
+        try {
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${description}&key=${import.meta.env.VITE_MAPS_API_KEY}`;
+            const response = await axios.get(geocodeUrl);
+            if (response.data.status === 'OK') {
+                const location = response.data.results[0].geometry.location;
+                setFormData({
+                    ...formData,
+                    latitude: location.lat,
+                    longitude: location.lng,
+                    destination: description
+                });
+                setFetchPredictions(false);
+                setPredictions([]);
+            }
+        } catch (error) {
+            console.error('Error fetching geocode data: ', error);
+        }
+    };
 
 
     function handleChange(e) {
@@ -160,8 +198,22 @@ const AddDestination = () => {
                                 name="destination"
                                 placeholder="Destination Name"
                                 className="form-control"
-                                onChange={handleChange}
+                                value={formData.destination}
+                                onChange={handleAddressChange}
                             />
+                            {fetchPredictions && (
+                                <ul className="list-group">
+                                    {predictions?.map((prediction) => (
+                                        <li
+                                            key={prediction.place_id}
+                                            className="list-group-item list-group-item-action"
+                                            onClick={() => handlePredictionSelect(prediction.description)}
+                                        >
+                                            {prediction.description}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Pincode</label>
@@ -173,7 +225,7 @@ const AddDestination = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             <label htmlFor="name" className="form-label">Latitude</label>
                             <input
                                 type="number"
@@ -192,7 +244,7 @@ const AddDestination = () => {
                                 className="form-control"
                                 onChange={handleChange}
                             />
-                        </div>
+                        </div> */}
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Description</label>
                             <input
