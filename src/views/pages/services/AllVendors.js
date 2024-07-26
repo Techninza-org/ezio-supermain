@@ -3,12 +3,11 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
 import CIcon from '@coreui/icons-react';
-import { cilPaperPlane } from '@coreui/icons';
+import { cilPaperPlane, cilTrash } from '@coreui/icons';
 import { AppSidebar, AppHeader } from '../../../components/index'
 
 const AllVendors = () => {
     const [services, setServices] = useState([]);
-    const user = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
     async function getUsers() {
         const res = await axios.get(`${import.meta.env.VITE_BASE_URL}superAdmin/vendors`, {
@@ -18,6 +17,17 @@ const AllVendors = () => {
         })
         const ser = res.data.vendors;
         setServices(ser);
+    }
+
+    async function deleteUser(id) {
+        const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}superAdmin/vendor/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        if (res.data.status === 200) {
+            getUsers();
+        }
     }
 
     const columns = useMemo(
@@ -53,6 +63,11 @@ const AllVendors = () => {
                 accessorFn: (dataRow) => <Link to={`/vendor/services/${dataRow.id}`} className="btn btn-primary"><CIcon icon={cilPaperPlane} /></Link>,
                 size: 50
             },
+            {
+                header: "Delete",
+                accessorFn: (dataRow) => <button className="btn btn-danger" onClick={() => { deleteUser(dataRow.id) }}><CIcon icon={cilTrash} /></button>,
+                size: 50
+            }
         ],
         [],
     );
