@@ -130,6 +130,7 @@ const AddDestination = () => {
                         value={formData.features[i - 1] || ""}
                         onChange={handleChange}
                         className="form-control"
+                        maxLength={'150'}
                     // placeholder={`Feature ${i}`}
                     />
                 </div>
@@ -152,6 +153,7 @@ const AddDestination = () => {
                         value={formData.customise_options[i - 1] || ""}
                         onChange={handleChange}
                         className="form-control"
+                        maxLength={'150'}
                     // placeholder={`Customise Option ${i}`}
                     />
                 </div>
@@ -177,6 +179,7 @@ const AddDestination = () => {
                                 className="form-control"
                                 value={formData.destination}
                                 onChange={handleAddressChange}
+                                maxLength={'150'}
                             />
                             {fetchPredictions && (
                                 <ul className="list-group">
@@ -223,13 +226,14 @@ const AddDestination = () => {
                             />
                         </div> */}
                         <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Description</label>
-                            <input
+                            <label htmlFor="name" className="form-label">Description (150 characters limit)</label>
+                            <textarea
                                 type="text"
                                 name="description"
                                 placeholder="Description"
                                 className="form-control"
                                 onChange={handleChange}
+                                maxLength={'150'}
                             />
                         </div>
                         <div className="mb-5">
