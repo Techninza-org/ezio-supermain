@@ -98,7 +98,6 @@ const AddCustomService = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        console.log(formData);
         const res = await axios.post("http://103.189.172.172:3000/custom/service", formData, {
             headers: {
                 Authorization: `Bearer ${token}`,

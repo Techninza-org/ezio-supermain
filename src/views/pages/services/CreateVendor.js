@@ -8,7 +8,6 @@ const CreateVendor = () => {
     const [formData, setFormData] = useState({})
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-    console.log(token);
 
     function handleChange(e) {
         const {name, value} = e.target
@@ -37,7 +36,6 @@ const CreateVendor = () => {
             alert('Not added')
             return
         }
-        console.log(res)
         navigate('/vendors')
     }
 

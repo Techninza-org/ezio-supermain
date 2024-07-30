@@ -18,7 +18,6 @@ const AllUsers = () => {
         })
         const ser = res.data.users;
         setServices(ser);
-        console.log(ser);
     }
 
     const columns = useMemo(

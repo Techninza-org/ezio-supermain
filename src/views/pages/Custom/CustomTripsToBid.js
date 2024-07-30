@@ -16,7 +16,6 @@ export default function CustomTripsToBid() {
                 }
             })
             const trips = res.data.custom_trips;
-            console.log(res.data);
             setTrips(trips);
         }
         getTrips();

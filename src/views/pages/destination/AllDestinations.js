@@ -15,7 +15,6 @@ const AllDestinations = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(res.data);
         setDestinations(res.data.destinations)
     }
 
@@ -26,7 +25,6 @@ const AllDestinations = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(res.data);
         getDestinations()
     }
 

@@ -9,7 +9,6 @@ const HostServices = () => {
     const token = localStorage.getItem('token')
     const { id } = useParams()
     const host_id = id
-    console.log(host_id, 'hostId');
     async function getServices() {
         const res = await axios.get(`${import.meta.env.VITE_BASE_URL}superAdmin/vendor-services/${host_id}`, {
             headers: {

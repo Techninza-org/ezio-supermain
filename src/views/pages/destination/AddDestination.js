@@ -28,7 +28,6 @@ const AddDestination = () => {
             setFetchPredictions(true);
             const predictions = await axios.get(`${import.meta.env.VITE_BASE_URL}destination/search/destination?address=${address}`);
             setPredictions(predictions.data.predictions);
-            console.log(predictions.data.predictions);
         } else {
             setFetchPredictions(false);
             setPredictions([]);
@@ -77,27 +76,11 @@ const AddDestination = () => {
             }));
         } else if (name === 'image') {
             const file = e.target.files[0];
-            const imageFormData = new FormData();
-            imageFormData.append('file', file);
-            imageFormData.append('upload_preset', 'm3opjz73');
-            imageFormData.append('folder', 'ezio_vendor');
-
-            axios.post('https://api.cloudinary.com/v1_1/dleiya55u/image/upload', imageFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            
+            setFormData({
+                ...formData,
+                image: file
             })
-                .then(response => {
-                    console.log('File uploaded successfully');
-                    console.log(response.data.secure_url);
-                    setFormData({
-                        ...formData,
-                        image: response.data.secure_url
-                    });
-                })
-                .catch(error => {
-                    console.error('Error uploading file: ', error);
-                });
         } else {
             setFormData({
                 ...formData,
@@ -109,7 +92,6 @@ const AddDestination = () => {
     async function handleSubmit(e) {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        console.log(formData, 'formdata');
         const formDataToSend = new FormData();
         formDataToSend.append("destination", formData.destination);
         formDataToSend.append("pincode", formData.pincode);
@@ -120,15 +102,10 @@ const AddDestination = () => {
         formDataToSend.append("customise_options", formData.customise_options);
         formDataToSend.append("image", formData.image);
 
-        console.log(formDataToSend, 'send');
-        for (var pair of formDataToSend.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}destination`, formData, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}destination`, formDataToSend, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                // "Content-Type": "multipart/form-data",
+                "Content-Type": "multipart/form-data",
             }
         })
         if (res.status === 200) {
