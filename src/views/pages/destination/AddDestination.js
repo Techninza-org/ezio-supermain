@@ -198,7 +198,7 @@ const AddDestination = () => {
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Pincode</label>
                             <input
-                                type="text"
+                                type="number"
                                 name="pincode"
                                 placeholder="Pincode"
                                 className="form-control"
@@ -239,13 +239,13 @@ const AddDestination = () => {
                         <div className="mb-5">
                             <h5>Features</h5>
                             <label htmlFor="numberOfPickups" className="form-label">Number of Features</label>
-                            <input type="text" name="numberOfFeatures" value={formData.numberOfFeatures} onChange={handleChange} placeholder="Number of features" className="form-control mb-3" />
+                            <input type="number" name="numberOfFeatures" value={formData.numberOfFeatures} onChange={handleChange} placeholder="Number of features" className="form-control mb-3" />
                             {renderFeatureInputs()}
                         </div>
                         <div className="mb-5">
                             <h5>Customise Options</h5>
                             <label htmlFor="numberOfPickups" className="form-label">Number of Customise Options</label>
-                            <input type="text" name="numberOfCustomiseOptions" value={formData.numberOfCustomiseOptions} onChange={handleChange} placeholder="Number of customise options" className="form-control mb-3" />
+                            <input type="number" name="numberOfCustomiseOptions" value={formData.numberOfCustomiseOptions} onChange={handleChange} placeholder="Number of customise options" className="form-control mb-3" />
                             {renderCustomiseOptionsInputs()}
                         </div>
                         <div className="mb-3">
