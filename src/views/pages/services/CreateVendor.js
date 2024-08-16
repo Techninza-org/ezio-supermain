@@ -71,7 +71,7 @@ const CreateVendor = () => {
                             <div className="mb-4">
                                 <label htmlFor="phone" className="form-label">Phone</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     name="phone"
                                     placeholder="Phone (10 digits)"
                                     className="form-control"
