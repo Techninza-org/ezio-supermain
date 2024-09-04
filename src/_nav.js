@@ -42,6 +42,12 @@ const _nav = [
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
+    component: CNavItem,
+    name: 'KYC',
+    to: '/kyc/all',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+  {
     component: CNavTitle,
     name: 'Destination',
   },

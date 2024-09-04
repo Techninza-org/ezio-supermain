@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
 import CIcon from '@coreui/icons-react';
-import { cilPaperPlane, cilTrash } from '@coreui/icons';
+import { cilArrowThickBottom, cilCheck, cilPaperPlane, cilTrash } from '@coreui/icons';
 import { AppSidebar, AppHeader } from '../../../components/index'
 
 const AllVendors = () => {
@@ -40,14 +40,14 @@ const AllVendors = () => {
             },
             {
                 header: 'Name',
-                accessorKey: 'username',
-                size: 150
-                // accessorFn: (dataRow) => <Link to={`/user/${dataRow.id}`} style={{ textDecoration: 'none' }}>{dataRow.username}</Link>,
+                // accessorKey: 'username',
+                size: 150,
+                accessorFn: (dataRow) => <p>{dataRow.username} {dataRow.verified ? <CIcon icon={cilCheck} /> : ''}</p>  ,
             },
-            {
-                header: 'Email',
-                accessorKey: 'email',
-            },
+            // {
+            //     header: 'Email',
+            //     accessorKey: 'email',
+            // },
             {
                 header: 'Phone',
                 accessorKey: 'phone',
