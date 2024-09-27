@@ -15,6 +15,7 @@ import VendorKycDetails from './views/pages/services/VendorKycDetails'
 import Transactions from './views/pages/services/transactions'
 import Blog from './views/pages/services/blog'
 import BlogsList from './views/pages/services/bloglist'
+import AllTransactions from './views/pages/services/allTransactions'
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
@@ -74,6 +75,7 @@ const App = () => {
           <Route exact path="/kyc/vendor/:id" name="kyc" element={<VendorKycDetails />} />
           <Route exact path="/service-options" name="service-options" element={<ServiceOption />} />
           <Route exact path="/transactions/:id" name="transactions" element={<Transactions />} />
+          <Route exact path="/transactions/all" name="transactions" element={<AllTransactions />} />
           <Route exact path="/blog" name="blog" element={<Blog />} />
           <Route exact path="/blogs" name="blogs" element={<BlogsList />} />
 

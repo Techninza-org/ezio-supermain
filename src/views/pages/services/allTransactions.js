@@ -4,18 +4,16 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { AppHeader, AppSidebar } from '../../../components';
 
-export default function Transactions() {
+export default function AllTransactions() {
     const [transacs, setTransacs] = useState([]);
-    const { id } = useParams();
 
     async function getTransacs() {
         const token = localStorage.getItem('token')
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}superAdmin/transactions`, { user_id: Number(id) }, {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}superAdmin/transactions/all`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
-        console.log(res.data, 'res');
         const tr = res.data.transactions;
         setTransacs(tr);
     }
@@ -48,7 +46,7 @@ export default function Transactions() {
             },
             {
                 header: 'Date',
-                accessorKey: 'created_at',
+                accessorFn: (dataRow) => new Date(dataRow.created_at).toLocaleString(),
                 size: 100,
             },
         ],
@@ -71,7 +69,7 @@ export default function Transactions() {
                 <AppHeader />
                 <div className="body flex-grow-1">
                     <div className='mx-5 mb-5'>
-                        <h1 className='text-center mb-4'>Transactions</h1>
+                        <h1 className='text-center mb-4'>All Transactions</h1>
                         <MantineReactTable table={table} />
                     </div>
                 </div>

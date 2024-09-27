@@ -3,6 +3,7 @@ import CIcon from '@coreui/icons-react'
 import {
   cilDrop,
   cilList,
+  cilMoney,
   cilPencil,
   cilSpeedometer,
 } from '@coreui/icons'
@@ -69,6 +70,16 @@ const _nav = [
     name: 'Service Options',
     to: '/service-options',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'Transactions',
+  },
+  {
+    component: CNavItem,
+    name: 'All Transactions',
+    to: '/transactions/all',
+    icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
