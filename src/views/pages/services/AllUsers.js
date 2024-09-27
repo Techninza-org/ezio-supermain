@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
 import CIcon from '@coreui/icons-react';
-import { cilPaperPlane } from '@coreui/icons';
+import { cilMoney, cilPaperPlane } from '@coreui/icons';
 import { AppSidebar, AppHeader } from '../../../components/index'
 
 const AllUsers = () => {
@@ -52,6 +52,11 @@ const AllUsers = () => {
             {
                 header: 'KYC',
                 accessorFn: (dataRow) => <Link to={`/kyc/${dataRow.id}`} className="btn btn-primary"><CIcon icon={cilPaperPlane} /></Link>,
+                size: 50,
+            },
+            {
+                header: 'Transactions',
+                accessorFn: (dataRow) => <Link to={`/transactions/${dataRow.id}`} className="btn btn-primary"><CIcon icon={cilMoney} /></Link>,
                 size: 50,
             },
         ],

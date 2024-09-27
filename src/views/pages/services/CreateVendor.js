@@ -23,6 +23,10 @@ const CreateVendor = () => {
             alert('Please fill all fields')
             return
         }
+        if(formData.password.length < 6 || !/\d/.test(formData.password) || !/[a-zA-Z]/.test(formData.password)){
+            alert('Password must be at least 6 characters long and contain at least one letter and one number')
+            return
+        }
         if(formData.phone.length !== 10){
             alert('Phone number must be 10 digits')
             return

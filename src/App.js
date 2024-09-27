@@ -12,6 +12,9 @@ import KycDetails from './views/pages/kyc/kycDetails'
 import ServiceOption from './views/pages/destination/ServiceOption'
 import PendingKyc from './views/pages/services/PendingKyc'
 import VendorKycDetails from './views/pages/services/VendorKycDetails'
+import Transactions from './views/pages/services/transactions'
+import Blog from './views/pages/services/blog'
+import BlogsList from './views/pages/services/bloglist'
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
@@ -70,6 +73,9 @@ const App = () => {
           <Route exact path="/kyc/all" name="kyc" element={<PendingKyc />} />
           <Route exact path="/kyc/vendor/:id" name="kyc" element={<VendorKycDetails />} />
           <Route exact path="/service-options" name="service-options" element={<ServiceOption />} />
+          <Route exact path="/transactions/:id" name="transactions" element={<Transactions />} />
+          <Route exact path="/blog" name="blog" element={<Blog />} />
+          <Route exact path="/blogs" name="blogs" element={<BlogsList />} />
 
 
           <Route path="*" name="Home" element={<DefaultLayout />} />
