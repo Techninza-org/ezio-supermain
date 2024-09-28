@@ -113,13 +113,13 @@ export default function Blog() {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="meta" className="form-label">Meta Tags</label>
+                                <label htmlFor="meta" className="form-label">Meta Description</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     id="meta"
                                     name="meta"
-                                    placeholder="Enter Meta Tags"
+                                    placeholder="Enter Meta Description"
                                     value={formData.meta}
                                     onChange={handleChange}
                                 />
