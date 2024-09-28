@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { AppHeader, AppSidebar } from '../../../components';
 import axios from 'axios';
 import MarkdownEditor from '@uiw/react-markdown-editor';
-
+import ReactDOMServer from 'react-dom/server';
+import Markdown from 'markdown-to-jsx';
 export default function Blog() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
