@@ -98,7 +98,8 @@ export default function Blog() {
                                 <MarkdownEditor
                                     value={formData.description}
                                     onChange={handleMarkdownChange}
-                                    height={300}
+                                    height={400}
+                                    className='z-10'
                                 />
                             </div>
                             <div className="mb-3">
