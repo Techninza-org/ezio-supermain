@@ -36,11 +36,20 @@ export default function Blog() {
         }));
     };
 
+    const convertMarkdownToString = (markdownText) => {
+        const jsxElement = (
+          <Markdown>{markdownText}</Markdown>
+        );
+        const jsxString = ReactDOMServer.renderToStaticMarkup(jsxElement);
+        return jsxString;
+      };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const mark = await convertMarkdownToString(formData.description);
         const data = new FormData();
         data.append('title', formData.title);
-        data.append('description', formData.description); // Markdown content
+        data.append('description', mark); // Markdown content
         data.append('meta', formData.meta);
         data.append('keywords', formData.keywords);
         data.append('category', formData.category);
