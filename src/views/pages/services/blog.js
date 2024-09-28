@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { AppHeader, AppSidebar } from '../../../components';
 import axios from 'axios';
+import MarkdownEditor from '@uiw/react-markdown-editor';
 
 export default function Blog() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
-        description: '',
+        description: '', // This will store the markdown content
+        meta: '',
+        keywords: '',
+        category: '',
         image: null,
     });
 
@@ -25,30 +29,43 @@ export default function Blog() {
         }
     };
 
+    const handleMarkdownChange = (content) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            description: content, // Store the markdown content
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
         data.append('title', formData.title);
-        data.append('description', formData.description);
+        data.append('description', formData.description); // Markdown content
+        data.append('meta', formData.meta);
+        data.append('keywords', formData.keywords);
+        data.append('category', formData.category);
         data.append('image', formData.image);
 
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
         setLoading(true);
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}superAdmin/blog`, formData, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}superAdmin/blog`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
             }
-        })
-        if(res.data.status === 201){
+        });
+        if (res.data.status === 201) {
             setLoading(false);
             alert('Blog added successfully');
             setFormData({
                 title: '',
                 description: '',
+                meta: '',
+                keywords: '',
+                category: '',
                 image: null,
             });
-        }else{
+        } else {
             setLoading(false);
             alert('Failed to add blog');
         }
@@ -77,17 +94,48 @@ export default function Blog() {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="description" className="form-label">Description</label>
-                                <textarea
-                                    className="form-control"
-                                    id="description"
-                                    name="description"
-                                    rows="5"
-                                    placeholder="Enter description"
+                                <label htmlFor="description" className="form-label">Description (Markdown)</label>
+                                <MarkdownEditor
                                     value={formData.description}
+                                    onChange={handleMarkdownChange}
+                                    height={300}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="meta" className="form-label">Meta Tags</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="meta"
+                                    name="meta"
+                                    placeholder="Enter Meta Tags"
+                                    value={formData.meta}
                                     onChange={handleChange}
-                                    required
-                                ></textarea>
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="keywords" className="form-label">Keywords</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="keywords"
+                                    name="keywords"
+                                    placeholder="Enter Keywords"
+                                    value={formData.keywords}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="category" className="form-label">Category</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="category"
+                                    name="category"
+                                    placeholder="Enter Category"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="image" className="form-label">Upload Image</label>
