@@ -78,8 +78,6 @@ const App = () => {
           <Route exact path="/transactions/all" name="transactions" element={<AllTransactions />} />
           <Route exact path="/blog" name="blog" element={<Blog />} />
           <Route exact path="/blogs" name="blogs" element={<BlogsList />} />
-
-
           <Route path="*" name="Home" element={<DefaultLayout />} />
         </Routes>
       </Suspense>

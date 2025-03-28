@@ -18,9 +18,9 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   async function handleLogin() {
     try {
       const creds = {
@@ -29,14 +29,14 @@ const Login = () => {
       }
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}auth/super-admin-login`,
-        creds
-      );
-      if(response.data.error) return alert("Invalid Credentials");
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      localStorage.setItem('token', response.data.token);
-      navigate("/dashboard")
+        creds,
+      )
+      if (response.data.error) return alert('Invalid Credentials')
+      localStorage.setItem('user', JSON.stringify(response.data.user))
+      localStorage.setItem('token', response.data.token)
+      navigate('/dashboard')
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
   return (
@@ -54,7 +54,12 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" name='username'  onChange={e => setUsername(e.target.value)}/>
+                      <CFormInput
+                        placeholder="Username"
+                        autoComplete="username"
+                        name="username"
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -63,8 +68,8 @@ const Login = () => {
                       <CFormInput
                         type="password"
                         placeholder="Password"
-                        name='password'
-                        onChange={e => setPassword(e.target.value)} 
+                        name="password"
+                        onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password"
                       />
                     </CInputGroup>
