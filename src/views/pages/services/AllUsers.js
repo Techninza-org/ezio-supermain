@@ -3,12 +3,12 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
 import CIcon from '@coreui/icons-react'
-import { cilMoney, cilPaperPlane } from '@coreui/icons'
+import { cilMoney, cilNotes, cilPaperPlane } from '@coreui/icons'
 import { AppSidebar, AppHeader } from '../../../components/index'
 
 const AllUsers = () => {
   const [services, setServices] = useState([])
-  const user = JSON.parse(localStorage.getItem('user'))
+  // const user = JSON.parse(localStorage.getItem('user'))
   const token = localStorage.getItem('token')
   async function getUsers() {
     const res = await axios.get(`${import.meta.env.VITE_BASE_URL}superAdmin/users`, {
@@ -67,6 +67,15 @@ const AllUsers = () => {
         accessorFn: (dataRow) => (
           <Link to={`/transactions/${dataRow.id}`} className="btn btn-primary">
             <CIcon icon={cilMoney} />
+          </Link>
+        ),
+        size: 50,
+      },
+      {
+        header: 'View Posts',
+        accessorFn: (dataRow) => (
+          <Link to={`/detail/${dataRow.id}`} className="btn btn-primary">
+            <CIcon icon={cilNotes} />
           </Link>
         ),
         size: 50,

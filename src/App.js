@@ -16,6 +16,7 @@ import Transactions from './views/pages/services/transactions'
 import Blog from './views/pages/services/blog'
 import BlogsList from './views/pages/services/bloglist'
 import AllTransactions from './views/pages/services/allTransactions'
+import AllUserDetail from './views/pages/services/AllUserDetail'
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
@@ -62,6 +63,7 @@ const App = () => {
           {/* <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} /> */}
           <Route exact path="/users" name="users" element={<AllUsers />} />
+          <Route exact path="detail/:id" name="users" element={<AllUserDetail />} />
           <Route exact path="/vendors" name="vendors" element={<AllVendors />} />
           <Route exact path="/vendor/create" name="vendors" element={<CreateVendor />} />
           <Route exact path="/vendor/services/:id" name="services" element={<HostServices />} />
