@@ -15,6 +15,7 @@ import { AppHeader, AppSidebar } from "../../../components";
 
 const AllUserDetail = () => {
   const [userData, setUserData] = useState(null);
+  
   const [selectedPost, setSelectedPost] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem("token");
